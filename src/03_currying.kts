@@ -8,12 +8,12 @@ val multiply = { x: Int, y: Int -> x * y }
 println(multiply(3, 5))
 
 /*
-    We want to transform { x: Int, y: Int -> x * y } into two functions that takes one parameter each and chain them
-    to produce the final output. The result function calling will be like this:
+    We want to transform multiply = { x: Int, y: Int -> x * y } into two functions that takes one parameter each and
+    chain them to produce the final output. The resulting function call will be like this:
 
     multiply(x)(y)
 
-    This means that multiply(x) would return the function { x, y -> x * y } with set. For example, if we call:
+    This means that multiply(x) would return the function { x, y -> x * y } with x set. For example, if we call:
 
     multiply(3)
 
@@ -21,11 +21,17 @@ println(multiply(3, 5))
 
     { 3, y -> 3 * y }
 
-    Then, we can take the function { 3, y -> 3 * y } and call it passing the y argument:
+    Then, we can take the function { 3, y -> 3 * y } and call it passing the y argument, given something like:
 
     { 3, 5 -> 3 * 5 }
 
-    Thus, executing the two functions in sequence
+    So, multiply(x)(y) is equivalent to:
+
+    { x -> { y -> x * y } }
+
+    therefore calling multiply(3)(5) is the same as:
+
+    { 3 -> { 5 -> 3 * 5 } }
 
  */
 
@@ -42,7 +48,7 @@ println(
 // Currying with function parameter
 
 /*
-    In the below, curryingMultiply will first return the function { x: Int -> AnotherFunction }.
+    curryingMultiply will first return the function { x: Int -> AnotherFunction }.
     The AnotherFunction that is returned from the first is { y: Int -> x * y }, with the x parameter initialized.
  */
 val curryingMultiply = { x: Int -> { y: Int -> x * y } }
