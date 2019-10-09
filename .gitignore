@@ -1,0 +1,14 @@
+/.project
+*/build
+/build
+/captures
+/local.properties
+/out
+
+*.iml
+*.pro
+
+.DS_Store
+.externalNativeBuild
+.idea/*
+
